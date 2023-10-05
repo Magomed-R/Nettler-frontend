@@ -31,6 +31,16 @@ export default {
                     this.error = true
                 }
             }
+        },
+        async previewFile(event) {
+            let form = new FormData()
+            form.append("file", event.target.files[0])
+
+            let response = await axios.post("/upload", form)
+            
+            if (response.status == 200) {
+                this.user.avatar = import.meta.env.VITE_SERVER_URL + "/" + response.data
+            }
         }
     },
     created() {
@@ -51,7 +61,7 @@ export default {
             </div>
             <div class="user__info">
                 <input v-model="user.username" type="text" class="username" :class="{'error': error}">
-                <input v-model="user.avatar" type="text" class="avatar__input">
+                <input @change="previewFile" type="file" class="avatar__input">
             </div>
         </div>
         <div class="basic-input">
