@@ -7,8 +7,6 @@ axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL || 'http://localhost:30
 axios.defaults.headers.common["Content-type"] = "application/json";
 axios.defaults.headers.common["authorization"] = localStorage.token;
 
-console.log(axios.defaults.baseURL)
-
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 dayjs.locale("ru");
