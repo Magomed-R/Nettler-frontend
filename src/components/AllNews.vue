@@ -57,7 +57,7 @@ export default {
 
     },
     mounted() {
-         this.loadNews()
+        this.loadNews()
     }
 }
 </script>
@@ -65,12 +65,14 @@ export default {
 <template>
     <section class="new__list">
         <article v-for="(item, index) in news" class="new__body" :key="item._id">
-            <div class="new__header" @click="goProfile(item.author)">                
+            <div class="new__header" @click="goProfile(item.author)">
                 <div class="new__avatar" :style="{
                     backgroundImage: 'url(' + item.author.avatar + ')',
                     backgroundPosition: 'center center',
                     backgroundSize: 'cover'
-                }"></div>
+                }" 
+                :class="{ 'empty-avatar': !item.author.avatar }"
+                ></div>
 
                 <p class="new__author" v-html="item.author.username"></p>
             </div>
@@ -80,7 +82,8 @@ export default {
             <div class="new__footer">
                 <div class="new__reactions">
                     <div class="new__likes" @click="likeNews(item)">
-                        <img :src="(user.likedNews.includes(item._id) ? `https://i.ibb.co/8zct618/liked.png` : `https://i.ibb.co/vd3TQ5p/unliked.png`)" />
+                        <img
+                            :src="(user.likedNews.includes(item._id) ? `https://i.ibb.co/8zct618/liked.png` : `https://i.ibb.co/vd3TQ5p/unliked.png`)" />
                         <span class="new__likes-number">{{ item.likes }}</span>
                     </div>
 
@@ -133,6 +136,10 @@ export default {
 
             p {
                 font-size: 20px;
+            }
+
+            .empty-avatar {
+                background-image: url("@/assets/empty account.svg") !important;
             }
         }
 

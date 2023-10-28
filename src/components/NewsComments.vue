@@ -60,7 +60,7 @@ export default {
         async newComment() {
             try {
                 let response = await axios.post(`/news/newComment`, {
-                    userId: localStorage._id,
+                    userId: this.user._id,
                     newsId: this.$route.params.id,
                     text: this.comment
                 })
@@ -176,6 +176,10 @@ export default {
 
         p {
             font-size: 20px;
+        }
+
+        .empty-avatar {
+            background-image: url("@/assets/empty account.svg") !important;
         }
     }
 
